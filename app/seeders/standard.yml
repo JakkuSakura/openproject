@@ -1048,7 +1048,7 @@ statuses:
     t_name: Closed
     color_name: gray-3
     default_done_ratio: 100
-    is_closed: true
+    category: closed
     position: 12
   - reference: :default_status_on_hold
     t_name: On hold
@@ -1059,7 +1059,7 @@ statuses:
     t_name: Rejected
     color_name: red-3
     default_done_ratio: 0
-    is_closed: true
+    category: closed
     position: 14
 
 time_entry_activities:

@@ -400,10 +400,14 @@ en:
         authentication_method: "Authentication method"
         jwt_sub: "Subject claim"
       status:
+        category: "Category"
         default_done_ratio: "% Complete"
         excluded_from_totals: "Exclude from calculation of totals in hierarchy"
-        is_closed: "Work package closed"
         is_readonly: "Work package read-only"
+      status/category:
+        closed: "Closed"
+        in_progress: "In Progress"
+        open: "Open"
       subproject_template_assignment:
         workspace_type: "Workspace type"
       time_entry:
@@ -6882,6 +6886,11 @@ en:
 
   statuses:
     edit:
+      captions:
+        category:
+          closed: "Work that has been completed."
+          in_progress: "Work that is actively being worked on."
+          open: "Work that has not yet started."
       status_color_text: |
         Click to assign or change the color of this status.
         It is shown in the status button and can be used for highlighting work packages in the table.

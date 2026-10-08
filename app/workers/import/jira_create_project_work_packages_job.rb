@@ -180,8 +180,8 @@ module Import
       status = Status.where("LOWER(name) = LOWER(?)", issue_status["name"]).first
       uses_existing = true
       if status.blank?
-        is_closed = issue_status.dig("statusCategory", "key") == "done"
-        status = Status.create!(name: issue_status["name"], is_closed: is_closed)
+        category = issue_status.dig("statusCategory", "key") == "done" ? "closed" : "open"
+        status = Status.create!(name: issue_status["name"], category:)
         uses_existing = false
       end
       jira_status = Import::JiraStatus.find_by!(origin_id: issue_status["id"], jira_import_id: @jira_import.id)

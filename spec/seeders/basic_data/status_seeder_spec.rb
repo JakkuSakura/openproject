@@ -48,7 +48,7 @@ RSpec.describe BasicData::StatusSeeder do
         - reference: :status_new
           name: New
           color_name: cyan-7
-          is_closed: false
+          category: "open"
           is_default: true
           position: 1
         - reference: :status_in_progress
@@ -60,7 +60,7 @@ RSpec.describe BasicData::StatusSeeder do
           name: Closed
           color_name: gray-3
           default_done_ratio: 100
-          is_closed: true
+          category: "closed"
           position: 3
       SEEDING_DATA_YAML
     end
@@ -68,7 +68,7 @@ RSpec.describe BasicData::StatusSeeder do
     it "creates the corresponding statuses with the given attributes" do
       expect(Status.count).to eq(3)
       expect(Status.find_by(name: "New")).to have_attributes(
-        is_closed: false,
+        category: "open",
         is_default: true,
         position: 1
       )
@@ -77,16 +77,16 @@ RSpec.describe BasicData::StatusSeeder do
         position: 2
       )
       expect(Status.find_by(name: "Closed")).to have_attributes(
-        is_closed: true,
+        category: "closed",
         is_default: false,
         default_done_ratio: 100,
         position: 3
       )
     end
 
-    it "sets is_closed and is_default to false if not specified" do
+    it "sets category to open and is_default to false if not specified" do
       expect(Status.find_by(name: "In progress")).to have_attributes(
-        is_closed: false,
+        category: "open",
         is_default: false
       )
     end

@@ -47,8 +47,8 @@ RSpec.describe Queries::WorkPackages::Filter::TypeaheadFilter do
   describe "#where clause" do
     subject { WorkPackage.joins(instance.joins + [:project]).where(instance.where) }
 
-    shared_let(:open_status) { create(:status, name: "In Progress", is_closed: false) }
-    shared_let(:closed_status) { create(:status, name: "Done", is_closed: true) }
+    shared_let(:open_status) { create(:status, name: "In Progress", category: "open") }
+    shared_let(:closed_status) { create(:status, name: "Done", category: "closed") }
     shared_let(:project)   { create(:project, name: "Phoenix") }
     shared_let(:epic_type) { create(:type, name: "Epic") }
     shared_let(:bug_type)  { create(:type, name: "Bug") }

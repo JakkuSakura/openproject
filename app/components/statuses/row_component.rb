@@ -63,7 +63,11 @@ module Statuses
       end
     end
 
-    def closed = flag_checkmark(:closed, status.is_closed?)
+    def category
+      render(Primer::Beta::Text.new(color: :subtle, test_selector: "category")) do
+        Status.human_attribute_name("category.#{status.category}") if status.category
+      end
+    end
 
     def readonly = flag_checkmark(:readonly, status.is_readonly?)
 

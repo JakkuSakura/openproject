@@ -241,8 +241,7 @@ class Version < ApplicationRecord
         )
 
         done = targeted_work_packages
-          .where(statuses: { is_closed: !open })
-          .includes(:status)
+          .joins(:status).merge(open ? Status.not_closed : Status.closed)
           .sum(sum_sql)
         progress = done.to_f / (estimated_average * issues_count)
       end

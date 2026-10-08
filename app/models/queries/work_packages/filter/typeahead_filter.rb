@@ -82,10 +82,10 @@ class Queries::WorkPackages::Filter::TypeaheadFilter <
 
     if search_term == open_term
       # Match meta statuses that are not closed (open statuses)
-      "#{Status.table_name}.is_closed = false"
+      "#{Status.table_name}.category != 'closed'"
     elsif search_term == closed_term
       # Match meta statuses that are closed
-      "#{Status.table_name}.is_closed = true"
+      "#{Status.table_name}.category = 'closed'"
     else
       # Match statuses by name
       Queries::Operators::Contains.sql_for_field([string], Status.table_name, "name")
