@@ -89,7 +89,12 @@ module OpenProject::Plugins
       end
     end
 
-    def self.filtered_strategy?(_strategy_key, provider)
+    def self.filtered_strategy?(strategy_key, provider)
+      # Fork change: allow OpenID Connect (Keycloak) login without the
+      # Enterprise-only `sso_auth_providers` gate. SAML and other SSO
+      # strategies remain gated.
+      return true if strategy_key.to_s == "openid_connect"
+
       name = provider[:name]&.to_s
       EnterpriseToken.allows_to?(:sso_auth_providers) || name == "developer"
     end
